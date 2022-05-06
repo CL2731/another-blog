@@ -1,15 +1,7 @@
-const express = require('express');
-const routes = require('.routes');
-const sequelize = require('./config/connection');
+const router = require('express').Router();
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+const apiRoutes = require('./api');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+router.use('/api', apiRoutes);
 
-app.use(routes);
-
-sequelize.sync({ force: false}).then(() => {
-    app.listen(PORT);
-})
+module.exports = router;
